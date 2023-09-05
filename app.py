@@ -23,25 +23,7 @@ if uploaded_file is not None:
     img_array = img_array/255.0
     predictions = model.predict(img_array)
     predicted_label_index=np.argmax(predictions)
-    if (predicted_label_index==0) & (predicted_label_index==3):
-        label=('Drowsiness Detected')
-
-    elif (predicted_label_index==3):
-        label=('Drowsiness Detected')
-
-    elif (predicted_label_index==0):
-        label=('Drowsiness Detected')
-
-    elif (predicted_label_index==2) & (predicted_label_index==3):
-        label=('Drowsiness Detected')
-
-    elif (predicted_label_index==1) & (predicted_label_index==2):
-        label=('No Drowsiness Detected')
-
-    elif predicted_label_index==1:
-        label=('No Drowsiness Detected')
-    else:
-        label=("Sorry!something went wrong....")
+    label=labels[predicted_label_index]
 
 
 st.write("### Prediction Result")
