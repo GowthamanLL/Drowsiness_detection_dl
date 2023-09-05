@@ -22,7 +22,6 @@ if uploaded_file is not None:
     img_array = np.expand_dims(img_array, axis=0)
     img_array = img_array/255.0
     predictions = model.predict(img_array)
-    predictions = model.predict(img_array)
     predicted_label_index=np.argmax(predictions)
     if (predicted_label_index==0):
         label=('Drowsiness Detected')
@@ -66,7 +65,23 @@ if sample_img_choice:
     img_array = np.expand_dims(img_array, axis=0)
     img_array = img_array/255.0
     predictions = model.predict(img_array)
-    label=labels[np.argmax(predictions)]
+    predicted_label_index=np.argmax(predictions)
+    if (predicted_label_index==0):
+        label=('Drowsiness Detected')
+    elif (predicted_label_index==3):
+        label=('Drowsiness Detected')
+    elif (predicted_label_index==2) and (predicted_label_index==3):
+        label=('Drowsiness Detected')
+    elif (predicted_label_index==0) and (predicted_label_index==1):
+        label=('Drowsiness Detected')
+    elif (predicted_label_index==1) & (predicted_label_index==2):
+        label=('No Drowsiness Detected')
+    elif (predicted_label_index==0) and (predicted_label_index==3):
+        label=('Drowsiness Detected')
+    elif predicted_label_index==1:
+        label=('No Drowsiness Detected')
+    else:
+        label=("No Drowsiness Detected")
     image1 = Image.open("d2.jpeg")
     st.image(image1, caption="Uploaded Image", use_column_width=True)    
     st.markdown(
