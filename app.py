@@ -1,10 +1,11 @@
 import streamlit as st
+import tensorflow
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 
 from PIL import Image
 import numpy as np
-st.title("Drowsy detection system")
+st.title("Drowsiness detection")
 
 st.write("Predict the person feel drowsy or not")
 
@@ -21,7 +22,26 @@ if uploaded_file is not None:
     img_array = np.expand_dims(img_array, axis=0)
     img_array = img_array/255.0
     predictions = model.predict(img_array)
-    label=labels[np.argmax(predictions)]
+    predicted_label_index=np.argmax(predictions)
+    if (predicted_label_index==0) & (predicted_label_index==3):
+        label=('Drowsiness Detected')
+
+    elif (predicted_label_index==3):
+        label=('Drowsiness Detected')
+
+    elif (predicted_label_index==0):
+        label=('Drowsiness Detected')
+
+    elif (predicted_label_index==2) & (predicted_label_index==3):
+        label=('Drowsiness Detected')
+
+    elif (predicted_label_index==1) & (predicted_label_index==2):
+        label=('No Drowsiness Detected')
+
+    elif predicted_label_index==1:
+        label=('No Drowsiness Detected')
+    else:
+        label=("Sorry!something went wrong....")
 
 
 st.write("### Prediction Result")
@@ -41,7 +61,7 @@ st.write("If you would not like to upload an image, you can use the sample image
 sample_img_choice = st.button("Use Sample Image")
 
 if sample_img_choice:
-    image1 = Image.open("card.jpg")
+    image1 = Image.open("dummy.jpg")
     image1=image.smart_resize(image1,(80, 80))
     img_array = image.img_to_array(image1)
     img_array = np.expand_dims(img_array, axis=0)
